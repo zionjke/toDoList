@@ -7,11 +7,17 @@ import './List.scss'
 
 class List extends React.Component {
 
+    removeList = list => {
+        if(window.confirm('Вы действительно хотите удалить список?')) {
+
+        }
+    }
+
     render() {
         return (
                 <ul className="list">
-                    {this.props.lists.map((list, index) => (
-                        <li key={index}
+                    {this.props.lists.map((list) => (
+                        <li key={list.id}
                             className={this.props.activeList
                             && this.props.activeList.id === list.id
                             && 'active'}
@@ -25,12 +31,11 @@ class List extends React.Component {
                                 {list.title}
                                 {list.tasks && ` (${list.tasks.length}) `}
                             </span>
-
                             <img
                                 className="list__remove-icon"
                                 src={removeSvg}
                                 alt="Remove icon"
-
+                                onClick
                                 />
                         </li>
                     ))}

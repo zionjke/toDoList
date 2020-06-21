@@ -19,6 +19,7 @@ class AddNewItemForm extends React.Component {
                 title: ""
             });
             this.props.addItem(newTitle)
+            {this.props.closePopup && this.props.closePopup()}
         }
 
     };
@@ -38,22 +39,17 @@ class AddNewItemForm extends React.Component {
 
     render = () => {
 
-        let classForInput = this.state.error ? "error" : "";
-
         return (
-            <div className="todoList-header">
-                <div className="todoList-newTaskForm">
-                    <input
-                           className={classForInput}
-                           onChange={this.onTitleChanged}
-                           onKeyPress={this.onKeyPress}
-                           value={this.state.title}
-                           type="text"
-                           placeholder="New item name"
-                    />
-                    <button onClick={this.onAddItemClick}>Add</button>
-                </div>
-            </div>
+                    <>
+                        <input
+                            className='field'
+                            onChange={this.onTitleChanged}
+                            onKeyPress={this.onKeyPress}
+                            value={this.state.title}
+                            type="text"
+                        />
+                        <button className='button' onClick={this.onAddItemClick}>{this.props.btnname}</button>
+                    </>
         );
     }
 }

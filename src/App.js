@@ -1,9 +1,10 @@
 import React from 'react';
 import {connect} from "react-redux";
-import {createTodoActionCreator, setTodoListAC} from "./redux/reducer";
+import {createTodoActionCreator, deleteTodoActionCreator, setTodoListAC} from "./redux/reducer";
 import {api} from "./dal/api";
 import List from "./components/List/List";
 import TodoList from "./components/TodoList";
+import AddList from "./components/AddList/AddList";
 
 class App extends React.Component {
 
@@ -18,10 +19,12 @@ class App extends React.Component {
     }
 
     addTodoList = (title) => {
-        api.createTodolist(title).then(response => {
-                    this.props.createTodolists(response.data.item)
-            });
+        api.createTodolist(title)
+            .then(response => {this.props.createTodolists(response.data.item)})
+
     };
+
+
 
     componentDidMount() {
         api.getTodolist().then(response => {this.props.setTodolists(response)});
@@ -31,17 +34,13 @@ class App extends React.Component {
 
     render = () => {
 
-        // const todolist = this.props.todolists.map(todo => <TodoList key={todo.id}
-        //                                                           id={todo.id}
-        //                                                           title={todo.title}
-        //                                                           tasks={todo.tasks}/>);
-
         return (
             <div className='todo'>
                 <div className="todo__sidebar">
                     <List lists={this.props.todolists}
                           onClickList={this.onClickList}
                           activeList={this.state.activelist}/>
+                          <AddList addTodoList={this.addTodoList}/>
                 </div>
                 <div className="todo__lists">
                     {this.props.todolists && this.state.activelist && (
@@ -72,7 +71,11 @@ const mapDispatchToProps = (dispatch) => {
         setTodolists: (todolists) => {
            const action = setTodoListAC(todolists);
            dispatch(action)
-        }
+        },
+        deleteTodo: (todolistId) => {
+            const action = deleteTodoActionCreator(todolistId);
+            dispatch(action)
+        },
     }
 };
 
