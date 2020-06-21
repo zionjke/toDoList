@@ -24,6 +24,11 @@ class App extends React.Component {
 
     };
 
+    deleteTodolist = (todolistId) => {
+        api.deleteTodo(todolistId).then( () => {this.props.deleteTodo(todolistId)});
+    };
+
+
 
 
     componentDidMount() {
@@ -39,12 +44,13 @@ class App extends React.Component {
                 <div className="todo__sidebar">
                     <List lists={this.props.todolists}
                           onClickList={this.onClickList}
-                          activeList={this.state.activelist}/>
+                          activeList={this.state.activelist}
+                          deleteList={this.deleteTodolist}/>
                           <AddList addTodoList={this.addTodoList}/>
                 </div>
                 <div className="todo__lists">
                     {this.props.todolists && this.state.activelist && (
-                        <TodoList
+                        <TodoList key={this.state.activelist.id}
                                   id={this.state.activelist.id}
                                   title={this.state.activelist.title}
                                   tasks={this.state.activelist.tasks}/>

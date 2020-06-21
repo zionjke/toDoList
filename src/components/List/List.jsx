@@ -7,11 +7,12 @@ import './List.scss'
 
 class List extends React.Component {
 
-    removeList = list => {
-        if(window.confirm('Вы действительно хотите удалить список?')) {
-
+    deleteList = list => {
+        if (window.confirm('Вы действительно хотите удалить список?')) {
+            this.props.deleteList(list.id)
         }
     }
+
 
     render() {
         return (
@@ -35,7 +36,7 @@ class List extends React.Component {
                                 className="list__remove-icon"
                                 src={removeSvg}
                                 alt="Remove icon"
-                                onClick
+                                onClick={() => this.deleteList(list)}
                                 />
                         </li>
                     ))}
