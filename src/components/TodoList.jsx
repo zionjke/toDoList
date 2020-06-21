@@ -2,7 +2,7 @@ import React from 'react';
 import AddNewItemForm from "./AddNewItemForm";
 import TodoListTasks from "./TodoListTasks";
 import TodoListFooter from "./TodoListFooter";
-import TodoListTitle from "./TodoListTitle";
+import TodoListTitle from "./Title/TodoListTitle";
 import {connect} from "react-redux";
 import {
     changeTaskActionCreator,
@@ -52,9 +52,7 @@ class TodoList extends React.Component {
 
     };
 
-    deleteTodolist = () => {
-        api.deleteTodo(this.props.id).then( () => {this.props.deleteTodo(this.props.id)});
-    };
+
 
 
     componentDidMount() {
@@ -81,17 +79,16 @@ class TodoList extends React.Component {
         });
 
         return (
-            <div className="todoList">
-                <TodoListTitle title={this.props.title}
-                               deleteTodolist={this.deleteTodolist}/>
-                <AddNewItemForm addItem={this.addTask}/>
-                <TodoListTasks changeStatus={this.changeStatus}
-                               changeTitle={this.changeTitle}
-                               tasks={filteredTask}
-                               deleteTask={this.deleteTask}/>
-                <TodoListFooter changeFilter={this.changeFilter}
-                                filterValue={this.state.filterValue}/>
-            </div>
+           <>
+               <TodoListTitle title={this.props.title}/>
+               <TodoListTasks changeStatus={this.changeStatus}
+                              changeTitle={this.changeTitle}
+                              tasks={filteredTask}
+                              deleteTask={this.deleteTask}/>
+               <TodoListFooter changeFilter={this.changeFilter}
+                               filterValue={this.state.filterValue}/>
+               <AddNewItemForm addItem={this.addTask}/>
+           </>
         );
     }
 }
@@ -113,11 +110,7 @@ const mapDispatchToProps = (dispatch) => {
         setTasks: (todolistId,task) =>  {
             const action = setTaskAC(todolistId,task);
             dispatch(action)
-        },
-        deleteTodo: (todolistId) => {
-            const action = deleteTodoActionCreator(todolistId);
-            dispatch(action)
-        },
+        }
     }
 };
 
