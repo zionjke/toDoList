@@ -19,9 +19,7 @@ class List extends React.Component {
                 <ul className="list">
                     {this.props.lists.map((list) => (
                         <li key={list.id}
-                            className={this.props.activeList
-                            && this.props.activeList.id === list.id
-                            && 'active'}
+                            className={ this.props.activeList.id === list.id && 'active'}
                             onClick={() => this.props.onClickList(list)}>
                             <img
                                 className='list__star-icon'
