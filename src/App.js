@@ -1,12 +1,21 @@
 import React from 'react';
-import './App.css';
-import TodoList from "./components/TodoList";
-import AddNewItemForm from "./components/AddNewItemForm";
 import {connect} from "react-redux";
 import {createTodoActionCreator, setTodoListAC} from "./redux/reducer";
 import {api} from "./dal/api";
+import List from "./components/List/List";
+import TodoList from "./components/TodoList";
 
 class App extends React.Component {
+
+    state = {
+        activelist: ''
+    };
+
+    onClickList = (list) => {
+        this.setState({
+            activelist: list
+        })
+    }
 
     addTodoList = (title) => {
         api.createTodolist(title).then(response => {
@@ -22,18 +31,25 @@ class App extends React.Component {
 
     render = () => {
 
-        const todolist = this.props.todolists.map(todo => <TodoList key={todo.id}
-                                                                  id={todo.id}
-                                                                  title={todo.title}
-                                                                  tasks={todo.tasks}/>);
+        // const todolist = this.props.todolists.map(todo => <TodoList key={todo.id}
+        //                                                           id={todo.id}
+        //                                                           title={todo.title}
+        //                                                           tasks={todo.tasks}/>);
 
         return (
-            <div>
-                <div>
-                    <AddNewItemForm addItem={this.addTodoList}/>
+            <div className='todo'>
+                <div className="todo__sidebar">
+                    <List lists={this.props.todolists}
+                          onClickList={this.onClickList}
+                          activeList={this.state.activelist}/>
                 </div>
-                <div className="App">
-                    {todolist}
+                <div className="todo__lists">
+                    {this.props.todolists && this.state.activelist && (
+                        <TodoList
+                                  id={this.state.activelist.id}
+                                  title={this.state.activelist.title}
+                                  tasks={this.state.activelist.tasks}/>
+                    )}
                 </div>
             </div>
         );
