@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const instance = axios.create({
+export const instance = axios.create({
     baseURL: "https://social-network.samuraijs.com/api/1.1/todo-lists",
     withCredentials: true,
     headers: {"API-KEY": "db79da77-d4ed-4333-9c43-3bf4d5e71c39"}
@@ -39,4 +39,4 @@ export const api = {
             )
             .then(response => response)
     }
-}
+};

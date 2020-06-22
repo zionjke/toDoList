@@ -10,7 +10,7 @@ import {
     deleteTaskActionCreator,
     deleteTodoActionCreator,
     setTaskAC
-} from "../redux/reducer";
+} from "../redux/todolistsReducer";
 import {api} from "../dal/api";
 
 class TodoList extends React.Component {

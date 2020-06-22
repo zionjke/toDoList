@@ -11,7 +11,7 @@ const initialState = {
     todolists: []
 };
 
-const reducer = (state = initialState, action) => {
+const todolistsReducer = (state = initialState, action) => {
     switch (action.type) {
         case SET_TODOLISTS:
             return {
@@ -179,6 +179,6 @@ export const changeTodoTitleAC =(todolistId,title) => {
         todolistId,
         title
     }
-}
+};
 
-export default reducer
+export default todolistsReducer

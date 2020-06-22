@@ -11,7 +11,7 @@ class List extends React.Component {
         if (window.confirm('Вы действительно хотите удалить список?')) {
             this.props.deleteList(list.id)
         }
-    }
+    };
 
 
     render() {

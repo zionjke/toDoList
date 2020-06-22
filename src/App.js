@@ -1,12 +1,15 @@
 import React from 'react';
 import {connect} from "react-redux";
-import {createTodoActionCreator, deleteTodoActionCreator, setTodoListAC} from "./redux/reducer";
+import {createTodoActionCreator, deleteTodoActionCreator, setTodoListAC} from "./redux/todolistsReducer";
 import {api} from "./dal/api";
 import List from "./components/List/List";
 import TodoList from "./components/TodoList";
 import AddList from "./components/AddList/AddList";
+import Login from "./components/Login/Login";
+import {Route} from "react-router-dom";
 
 class App extends React.Component {
+
 
     state = {
         activelist: ''
@@ -16,7 +19,7 @@ class App extends React.Component {
         this.setState({
             activelist: list
         })
-    }
+    };
 
     addTodoList = (title) => {
         api.createTodolist(title)
@@ -31,9 +34,12 @@ class App extends React.Component {
 
 
 
-    componentDidMount() {
-        api.getTodolist().then(response => {this.props.setTodolists(response)});
+    componentDidMount ()  {
+        api.getTodolist().then(response => {
+            this.props.getTodolists(response);
+        });
     };
+
 
 
 
@@ -41,6 +47,7 @@ class App extends React.Component {
 
         return (
             <div className='todo'>
+                <Route path='/login' render={() => <Login/>}/>
                 <div className="todo__sidebar">
                     <List lists={this.props.todolists}
                           onClickList={this.onClickList}
@@ -64,7 +71,7 @@ class App extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
-        todolists: state.todolists
+        todolists: state.todolists.todolists
     }
 };
 
@@ -74,7 +81,7 @@ const mapDispatchToProps = (dispatch) => {
            const action = createTodoActionCreator(newTodolist);
            dispatch(action)
        },
-        setTodolists: (todolists) => {
+        getTodolists: (todolists) => {
            const action = setTodoListAC(todolists);
            dispatch(action)
         },
