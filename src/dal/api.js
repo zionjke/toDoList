@@ -1,6 +1,11 @@
 import axios from "axios";
 
-export const instance = axios.create({
+export const loginInstance = axios.create({
+    baseURL:'https://social-network.samuraijs.com/api/1.1',
+    withCredentials: true,
+})
+
+const instance = axios.create({
     baseURL: "https://social-network.samuraijs.com/api/1.1/todo-lists",
     withCredentials: true,
     headers: {"API-KEY": "db79da77-d4ed-4333-9c43-3bf4d5e71c39"}
