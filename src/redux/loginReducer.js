@@ -1,4 +1,4 @@
-import {instance} from "../dal/api";
+import {loginInstance} from "../dal/api";
 
 
 const LOGIN = 'LOGIN';
@@ -29,7 +29,7 @@ const loginReducer = (state=initialState,action) => {
 };
 
 export const setStatus = (login,password,remembermy,) => (dispatch) => {
-    instance.post('auth/login', {
+    loginInstance.post('auth/login', {
         login,password,remembermy
     }).then((response) => {
         debugger
