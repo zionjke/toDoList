@@ -9,6 +9,7 @@ export const Login = (props) => {
     let rememberMeRef = React.createRef();
 
 const onClickLogin = () => {
+    debugger
     props.setStatus && props.setStatus(loginRef.current.value,
         passwordRef.current.value,
         rememberMeRef.current.checked)
