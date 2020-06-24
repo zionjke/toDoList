@@ -4,8 +4,6 @@ import todolistsReducer from "./todolistsReducer";
 import thunk from "redux-thunk";
 
 
-
-
 const store = createStore(combineReducers({
     login: loginReducer,
     todolists: todolistsReducer

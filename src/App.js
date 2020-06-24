@@ -23,8 +23,10 @@ class App extends React.Component {
 
 
     addTodoList = (title) => {
+        debugger
         api.createTodolist(title)
             .then(response => {
+                debugger
                 this.props.createTodolists(response.data.item)
             })
 
@@ -40,6 +42,7 @@ class App extends React.Component {
     componentDidMount() {
         api.getTodolist().then(response => {
             this.props.getTodolists(response);
+
         });
     };
 
@@ -49,7 +52,7 @@ class App extends React.Component {
 
         return (
             <div className='todo'>
-                <Route path='/login' render={() => <Login/>}/>
+                {/*<Route path='/login' render={() => <Login/>}/>*/}
                 <div className="todo__sidebar">
                     <List lists={this.props.todolists}
                           onClickList={this.onClickList}
@@ -58,13 +61,14 @@ class App extends React.Component {
                     <AddList addTodoList={this.addTodoList}/>
                 </div>
                 <div className="todo__lists">
-                    {this.props.todolists && this.state.activelist && (
-                        <Route path='/list/:id' render={() => <TodoList key={this.state.activelist.id}
-                                                                        id={this.state.activelist.id}
-                                                                        title={this.state.activelist.title}
-                                                                        tasks={this.state.activelist.tasks}/>}/>
-
-                    )}
+                    {this.props.todolists.map(todo => {
+                        if(todo.id === this.state.activelist.id) {
+                           return <TodoList key={todo.id}
+                                      id={todo.id}
+                                      title={todo.title}
+                                      tasks={todo.tasks}/>
+                        }
+                    })}
                 </div>
             </div>
         );

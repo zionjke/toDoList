@@ -1,5 +1,4 @@
 import React from 'react'
-
 import removeSvg from '../../assets/img/remove.svg'
 import starSvg from '../../assets/img/star.svg'
 import './List.scss'
@@ -29,9 +28,9 @@ class List extends React.Component {
                             />
                             <Link to={`/list/${list.id}`}>
                                 <span>
-                                {list.title}
+                                    {list.title}
                                     {list.tasks && ` (${list.tasks.length}) `}
-                            </span>
+                                </span>
                             </Link>
                             <img
                                 className="list__remove-icon"

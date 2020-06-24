@@ -24,6 +24,7 @@ const todolistsReducer = (state = initialState, action) => {
                 })
             };
         case SET_TODOLISTS_TASKS:
+            debugger
             return {
                 ...state,
                 todolists: state.todolists.map (todo => {
@@ -43,6 +44,7 @@ const todolistsReducer = (state = initialState, action) => {
                 todolists: [...state.todolists, action.newTodolist]
             };
         case CREATE_TASK:
+            debugger
             return {
                 ...state,
                 todolists: state.todolists.map(todo => {
