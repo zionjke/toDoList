@@ -11,7 +11,7 @@ import {
     setTaskAC
 } from "../redux/todolistsReducer";
 import {api} from "../dal/api";
-import {Route, withRouter} from "react-router-dom";
+import {withRouter} from "react-router-dom";
 
 class TodoList extends React.Component {
 
@@ -21,9 +21,7 @@ class TodoList extends React.Component {
 
 
     addTask = (newText) => {
-        debugger
             api.addTask(newText,this.props.id).then(response => {
-                debugger
                     this.props.addTask(response.data.item ,this.props.id)
             });
     };

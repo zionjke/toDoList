@@ -23,7 +23,6 @@ class App extends React.Component {
 
 
     addTodoList = (title) => {
-        debugger
         api.createTodolist(title)
             .then(response => {
                 debugger
@@ -42,7 +41,7 @@ class App extends React.Component {
     componentDidMount() {
         api.getTodolist().then(response => {
             this.props.getTodolists(response);
-
+            console.log(response)
         });
     };
 

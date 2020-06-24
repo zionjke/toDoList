@@ -2,7 +2,7 @@ import React from 'react'
 import removeSvg from '../../assets/img/remove.svg'
 import starSvg from '../../assets/img/star.svg'
 import './List.scss'
-import {Link} from "react-router-dom";
+import {api} from "../../dal/api";
 
 
 class List extends React.Component {
@@ -12,6 +12,8 @@ class List extends React.Component {
             this.props.deleteList(list.id)
         }
     };
+
+
 
 
     render() {
@@ -26,12 +28,11 @@ class List extends React.Component {
                                 src={starSvg}
                                 alt="Star icon"
                             />
-                            <Link to={`/list/${list.id}`}>
+
                                 <span>
                                     {list.title}
-                                    {list.tasks && ` (${list.tasks.length}) `}
                                 </span>
-                            </Link>
+
                             <img
                                 className="list__remove-icon"
                                 src={removeSvg}
