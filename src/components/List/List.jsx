@@ -3,6 +3,7 @@ import React from 'react'
 import removeSvg from '../../assets/img/remove.svg'
 import starSvg from '../../assets/img/star.svg'
 import './List.scss'
+import {Link} from "react-router-dom";
 
 
 class List extends React.Component {
@@ -26,10 +27,12 @@ class List extends React.Component {
                                 src={starSvg}
                                 alt="Star icon"
                             />
-                            <span>
+                            <Link to={`/list/${list.id}`}>
+                                <span>
                                 {list.title}
-                                {list.tasks && ` (${list.tasks.length}) `}
+                                    {list.tasks && ` (${list.tasks.length}) `}
                             </span>
+                            </Link>
                             <img
                                 className="list__remove-icon"
                                 src={removeSvg}

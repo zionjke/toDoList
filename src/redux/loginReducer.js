@@ -32,7 +32,7 @@ export const setStatus = (login,password,remembermy,) => (dispatch) => {
     instance.post('auth/login', {
         login,password,remembermy
     }).then((response) => {
-        console.log(response.data)
+        debugger
     })
 };
 

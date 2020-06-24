@@ -21,29 +21,31 @@ class App extends React.Component {
         })
     };
 
+
     addTodoList = (title) => {
         api.createTodolist(title)
-            .then(response => {this.props.createTodolists(response.data.item)})
+            .then(response => {
+                this.props.createTodolists(response.data.item)
+            })
 
     };
 
     deleteTodolist = (todolistId) => {
-        api.deleteTodo(todolistId).then( () => {this.props.deleteTodo(todolistId)});
+        api.deleteTodo(todolistId).then(() => {
+            this.props.deleteTodo(todolistId)
+        });
     };
 
 
-
-
-    componentDidMount ()  {
+    componentDidMount() {
         api.getTodolist().then(response => {
             this.props.getTodolists(response);
         });
     };
 
 
-
-
     render = () => {
+
 
         return (
             <div className='todo'>
@@ -53,14 +55,15 @@ class App extends React.Component {
                           onClickList={this.onClickList}
                           activeList={this.state.activelist}
                           deleteList={this.deleteTodolist}/>
-                          <AddList addTodoList={this.addTodoList}/>
+                    <AddList addTodoList={this.addTodoList}/>
                 </div>
                 <div className="todo__lists">
                     {this.props.todolists && this.state.activelist && (
-                        <TodoList key={this.state.activelist.id}
-                                  id={this.state.activelist.id}
-                                  title={this.state.activelist.title}
-                                  tasks={this.state.activelist.tasks}/>
+                        <Route path='/list/:id' render={() => <TodoList key={this.state.activelist.id}
+                                                                        id={this.state.activelist.id}
+                                                                        title={this.state.activelist.title}
+                                                                        tasks={this.state.activelist.tasks}/>}/>
+
                     )}
                 </div>
             </div>
@@ -77,13 +80,13 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-       createTodolists: (newTodolist) => {
-           const action = createTodoActionCreator(newTodolist);
-           dispatch(action)
-       },
+        createTodolists: (newTodolist) => {
+            const action = createTodoActionCreator(newTodolist);
+            dispatch(action)
+        },
         getTodolists: (todolists) => {
-           const action = setTodoListAC(todolists);
-           dispatch(action)
+            const action = setTodoListAC(todolists);
+            dispatch(action)
         },
         deleteTodo: (todolistId) => {
             const action = deleteTodoActionCreator(todolistId);
@@ -92,7 +95,7 @@ const mapDispatchToProps = (dispatch) => {
     }
 };
 
-const ConnectedApp = connect(mapStateToProps,mapDispatchToProps)(App);
+const ConnectedApp = connect(mapStateToProps, mapDispatchToProps)(App);
 
 export default ConnectedApp;
 

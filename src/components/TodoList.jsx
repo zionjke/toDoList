@@ -12,6 +12,7 @@ import {
     setTaskAC
 } from "../redux/todolistsReducer";
 import {api} from "../dal/api";
+import {withRouter} from "react-router-dom";
 
 class TodoList extends React.Component {
 
@@ -113,6 +114,6 @@ const mapDispatchToProps = (dispatch) => {
         }
     }
 };
-
-export default connect(null, mapDispatchToProps)(TodoList)
+let WithUrlDataContainerComponent =  withRouter(TodoList);
+export default connect(null, mapDispatchToProps)(WithUrlDataContainerComponent)
 
