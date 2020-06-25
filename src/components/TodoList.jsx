@@ -34,7 +34,7 @@ class TodoList extends React.Component {
 
     changeTask = (task,obj) => {
        api.changeTask(task,obj,this.props.id).then( () => {this.props.updateTask(task.id,obj,this.props.id)});
-    }
+    };
 
     changeStatus = (task, isDone) => {
         this.changeTask(task, {status: isDone ? 2 : 0});
@@ -120,6 +120,6 @@ const mapDispatchToProps = (dispatch) => {
         }
     }
 };
-let WithUrlDataContainerComponent =  withRouter(TodoList);
-export default connect(null, mapDispatchToProps)(WithUrlDataContainerComponent)
+
+export default connect(null, mapDispatchToProps)(TodoList)
 
