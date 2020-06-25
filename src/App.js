@@ -6,10 +6,9 @@ import List from "./components/List/List";
 import TodoList from "./components/TodoList";
 import AddList from "./components/AddList/AddList";
 import Login from "./components/Login/Login";
-import {Route} from "react-router-dom";
+
 
 class App extends React.Component {
-
 
     state = {
         activelist: ''

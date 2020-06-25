@@ -5,7 +5,7 @@ import TodoListFooter from "./TodoListFooter";
 import TodoListTitle from "./Title/TodoListTitle";
 import {connect} from "react-redux";
 import {
-    changeTaskActionCreator,
+    changeTaskActionCreator, changeTodoTitleAC,
     createTaskActionCreator,
     deleteTaskActionCreator,
     setTaskAC
@@ -44,6 +44,10 @@ class TodoList extends React.Component {
         this.changeTask(task, {title: newTitle});
     };
 
+    changeTodoTitle = (title) => {
+        api.changeTodoTitle(this.props.id,title).then (() => {this.props.editTitle(this.props.id,title)})
+    };
+
 
     deleteTask = (taskID) => {
             api.deleteTask(this.props.id,taskID).then( () => {
@@ -78,7 +82,8 @@ class TodoList extends React.Component {
 
         return (
            <>
-               <TodoListTitle title={this.props.title}/>
+               <TodoListTitle title={this.props.title}
+                              editTitle={this.changeTodoTitle}/>
                <TodoListTasks changeStatus={this.changeStatus}
                               changeTitle={this.changeTitle}
                               tasks={filteredTask}
@@ -107,6 +112,10 @@ const mapDispatchToProps = (dispatch) => {
         },
         setTasks: (todolistId,task) =>  {
             const action = setTaskAC(todolistId,task);
+            dispatch(action)
+        },
+        editTitle: (todolistId,title) => {
+            const action = changeTodoTitleAC(todolistId,title);
             dispatch(action)
         }
     }
