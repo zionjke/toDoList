@@ -23,7 +23,9 @@ class TodoListTask extends React.Component {
 
 
     onIsDeleteTask = () => {
-        this.props.deleteTask(this.props.task.id)
+        if(window.confirm('Вы действительно хотите удалить задачу?')) {
+            this.props.deleteTask(this.props.task.id)
+        }
     };
 
     render = () => {
@@ -84,7 +86,6 @@ class TodoListTask extends React.Component {
                         </svg>
                     </div>
                 </div>
-                {/*<button onClick={this.onIsDeleteTask}>x</button>*/}
             </div>
         );
     }

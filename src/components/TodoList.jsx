@@ -1,7 +1,7 @@
 import React from 'react';
 import AddNewItemForm from "./AddNewItemForm";
 import TodoListTasks from "./Tasks/TodoListTasks";
-import TodoListFooter from "./TodoListFooter";
+import TodoListFooter from "./Footer/TodoListFooter";
 import TodoListTitle from "./Title/TodoListTitle";
 import {connect} from "react-redux";
 import {addTask, changeTodoTask, deleteTodoTask, editTodoTitle, getTodoTasks} from "../redux/todolistsReducer";
