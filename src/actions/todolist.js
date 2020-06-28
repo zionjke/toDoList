@@ -4,6 +4,7 @@ export const CHANGE_TASK = 'TODOLIST/APP/CHANGE_TASK';
 export const DELETE_TODO = 'TODOLIST/APP/DELETE_TODO';
 export const DELETE_TASK = 'TODOLIST/APP/DELETE_TASK';
 export const SET_TODOLISTS = 'TODOLIST/APP/SET_TODOLISTS';
+export const SET_ACTIVE_LIST = 'TODOLIST/APP/SET_ACTIVE_LIST';
 export const SET_TODOLISTS_TASKS = 'TODOLIST/APP/SET_TODOLISTS_TASKS';
 export const CHANGE_TODO_TITLE = 'TODOLIST/APP/CHANGE_TODO_TITLE';
 
@@ -68,3 +69,10 @@ export const changeTodoTitle =(todolistId,title) => {
         title
     }
 };
+
+export const setActiveList = (activeList) => {
+    return {
+        type: SET_ACTIVE_LIST,
+        activeList
+    }
+}

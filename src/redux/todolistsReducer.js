@@ -2,14 +2,15 @@ import {
     CHANGE_TASK,
     CHANGE_TODO_TITLE, changeTodoTitle,
     CREATE_TASK,
-    CREATE_TODOLIST, createTask, createTodo, DELETE_TASK, DELETE_TODO, deleteTask, deleteTodo,
+    CREATE_TODOLIST, createTask, createTodo, DELETE_TASK, DELETE_TODO, deleteTask, deleteTodo, SET_ACTIVE_LIST,
     SET_TODOLISTS,
     SET_TODOLISTS_TASKS, setTasks, setTodoList, updateTask
 } from "../actions/todolist";
 import {api} from "../dal/api";
 
 const initialState = {
-    todolists: []
+    todolists: [],
+    activeList: ''
 };
 
 const todolistsReducer = (state = initialState, action) => {
@@ -114,6 +115,11 @@ const todolistsReducer = (state = initialState, action) => {
                         }
                     }
                 })
+            }
+        case SET_ACTIVE_LIST:
+            return {
+                ...state,
+                activeList: action.activeList
             }
 
     }

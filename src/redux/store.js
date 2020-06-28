@@ -6,7 +6,7 @@ import thunk from "redux-thunk";
 
 const store = createStore(combineReducers({
     login: loginReducer,
-    todolists: todolistsReducer
+    todolist: todolistsReducer
 }),applyMiddleware(thunk));
 
 export default store

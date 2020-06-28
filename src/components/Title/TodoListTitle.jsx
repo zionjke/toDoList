@@ -20,7 +20,7 @@ class TodoListTitle extends React.Component {
         return (
             <div className="todo__title">
                 {this.state.isEditMode
-                    ? <input defaultValue={this.props.title}
+                    ? <input className='field' defaultValue={this.props.title}
                              autoFocus={true}
                              onBlur={this.deactivatedEditMode}
                     />
