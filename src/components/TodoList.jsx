@@ -77,7 +77,8 @@ class TodoList extends React.Component {
                               tasks={filteredTask}
                               deleteTask={this.deleteTask}/>
                <TodoListFooter changeFilter={this.changeFilter}
-                               filterValue={this.state.filterValue}/>
+                               filterValue={this.state.filterValue}
+                               tasks={this.props.tasks}/>
                <AddNewItemForm addItem={this.addTask}/>
            </>
         );

@@ -1,10 +1,11 @@
 import React from 'react';
 import TodoListTask from "./TodoListTask";
+import './Tasks.scss'
 
 class TodoListTasks extends React.Component {
     render = () => {
 
-        let taskEl = this.props.tasks.map ( task => <TodoListTask key={task.id}
+        let taskItem = this.props.tasks.map ( task => <TodoListTask key={task.id}
                                                                     {...task}
                                                                   task={task}
                                                                   changeStatus={this.props.changeStatus}
@@ -12,8 +13,8 @@ class TodoListTasks extends React.Component {
                                                                   deleteTask={this.props.deleteTask}/>);
 
         return (
-            <div className="todoList-tasks">
-                {taskEl}
+            <div className="todo__tasks">
+                {this.props.tasks && !this.props.tasks.length ? <h2>Задачи отсутствуют</h2> : taskItem}
             </div>
         );
     }
