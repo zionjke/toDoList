@@ -1,5 +1,4 @@
 import React from 'react';
-import AddNewItemForm from "./AddNewItemForm";
 import TodoListTasks from "./Tasks/TodoListTasks";
 import TodoListFooter from "./Footer/TodoListFooter";
 import TodoListTitle from "./Title/TodoListTitle";
@@ -7,6 +6,7 @@ import {connect} from "react-redux";
 import {addTask, changeTodoTask, deleteTodoTask, editTodoTitle, getTodoTasks} from "../redux/todolistsReducer";
 
 import {withRouter} from "react-router-dom";
+import AddTaskForm from "./AddTask/AddTaskForm";
 
 class TodoList extends React.Component {
 
@@ -16,7 +16,7 @@ class TodoList extends React.Component {
 
 
     addTask = (title) => {
-        this.props.addTask(title,this.props.id)
+        this.props.addTask(title, this.props.id)
     };
 
     changeFilter = (newFilterValue) => {
@@ -25,8 +25,8 @@ class TodoList extends React.Component {
         });
     };
 
-    changeTask = (task,obj) => {
-        this.props.changeTodoTask(task,obj,this.props.id)
+    changeTask = (task, obj) => {
+        this.props.changeTodoTask(task, obj, this.props.id)
     }
 
     changeStatus = (task, isDone) => {
@@ -39,11 +39,11 @@ class TodoList extends React.Component {
 
 
     deleteTask = (taskID) => {
-        this.props.deleteTodoTask(taskID,this.props.id)
+        this.props.deleteTodoTask(taskID, this.props.id)
     };
 
     changeTodoTitle = (title) => {
-        this.props.editTodoTitle(this.props.id,title)
+        this.props.editTodoTitle(this.props.id, title)
     }
 
 
@@ -69,23 +69,30 @@ class TodoList extends React.Component {
         });
 
         return (
-           <>
-               <TodoListTitle title={this.props.title}
-                              editTitle={this.changeTodoTitle}/>
-               <TodoListTasks changeStatus={this.changeStatus}
-                              changeTitle={this.editTaskTitle}
-                              tasks={filteredTask}
-                              deleteTask={this.deleteTask}/>
-               <TodoListFooter changeFilter={this.changeFilter}
-                               filterValue={this.state.filterValue}
-                               tasks={this.props.tasks}/>
-               <AddNewItemForm addItem={this.addTask}/>
-           </>
+            <>
+                <TodoListTitle title={this.props.title}
+                               editTitle={this.changeTodoTitle}/>
+                <TodoListTasks changeStatus={this.changeStatus}
+                               changeTitle={this.editTaskTitle}
+                               tasks={filteredTask}
+                               deleteTask={this.deleteTask}/>
+                <TodoListFooter changeFilter={this.changeFilter}
+                                filterValue={this.state.filterValue}
+                                tasks={this.props.tasks}/>
+                <AddTaskForm addTask={this.addTask}/>
+
+            </>
         );
     }
 }
 
 
-let WithUrlDataContainerComponent =  withRouter(TodoList);
-export default connect(null, {addTask,changeTodoTask,deleteTodoTask,getTodoTasks,editTodoTitle})(WithUrlDataContainerComponent)
+
+export default connect(null, {
+    addTask,
+    changeTodoTask,
+    deleteTodoTask,
+    getTodoTasks,
+    editTodoTitle
+})(TodoList)
 

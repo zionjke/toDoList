@@ -20,6 +20,7 @@ class AddNewItemForm extends React.Component {
             });
             this.props.addItem(newTitle)
             {this.props.closePopup && this.props.closePopup()}
+            {this.props.toggleFormVisible && this.props.toggleFormVisible()}
         }
 
     };
@@ -51,6 +52,9 @@ class AddNewItemForm extends React.Component {
                             type="text"
                         />
                         <button className='button' onClick={this.onAddItemClick}>{this.props.btnname}</button>
+                        {this.props.cancelButton &&
+                        <button onClick={this.props.toggleFormVisible} className='button button--grey'>Отмена</button>
+                        }
                     </>
         );
     }

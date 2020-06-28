@@ -16,7 +16,7 @@ class TodoListFooter extends React.Component {
 
         return (
             <>
-                {this.props.tasks.length >= 1 && <div className="todo__footer">
+                {this.props.tasks && this.props.tasks.length >= 1 && <div className="todo__footer">
                      <div>
                         <button  onClick={this.onAllFilterClick} className={`${classForAll} button`}>Все</button>
                         <button onClick={this.onCompletedFilterClick} className={`${classForCompleted} button`}>Выполненые</button>
