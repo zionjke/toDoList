@@ -4,7 +4,7 @@ import TodoListTasks from "./TodoListTasks";
 import TodoListFooter from "./TodoListFooter";
 import TodoListTitle from "./Title/TodoListTitle";
 import {connect} from "react-redux";
-import {addTask, changeTodoTask, deleteTodoTask, getTodoTasks} from "../redux/todolistsReducer";
+import {addTask, changeTodoTask, deleteTodoTask, editTodoTitle, getTodoTasks} from "../redux/todolistsReducer";
 
 import {withRouter} from "react-router-dom";
 
@@ -33,7 +33,7 @@ class TodoList extends React.Component {
         this.changeTask(task, {status: isDone ? 2 : 0});
     };
 
-    changeTitle = (task, newTitle) => {
+    editTaskTitle = (task, newTitle) => {
         this.changeTask(task, {title: newTitle});
     };
 
@@ -41,6 +41,10 @@ class TodoList extends React.Component {
     deleteTask = (taskID) => {
         this.props.deleteTodoTask(taskID,this.props.id)
     };
+
+    changeTodoTitle = (title) => {
+        this.props.editTodoTitle(this.props.id,title)
+    }
 
 
     componentDidMount() {
@@ -66,9 +70,10 @@ class TodoList extends React.Component {
 
         return (
            <>
-               <TodoListTitle title={this.props.title}/>
+               <TodoListTitle title={this.props.title}
+                              editTitle={this.changeTodoTitle}/>
                <TodoListTasks changeStatus={this.changeStatus}
-                              changeTitle={this.changeTitle}
+                              changeTitle={this.editTaskTitle}
                               tasks={filteredTask}
                               deleteTask={this.deleteTask}/>
                <TodoListFooter changeFilter={this.changeFilter}
@@ -81,5 +86,5 @@ class TodoList extends React.Component {
 
 
 let WithUrlDataContainerComponent =  withRouter(TodoList);
-export default connect(null, {addTask,changeTodoTask,deleteTodoTask,getTodoTasks})(WithUrlDataContainerComponent)
+export default connect(null, {addTask,changeTodoTask,deleteTodoTask,getTodoTasks,editTodoTitle})(WithUrlDataContainerComponent)
 
