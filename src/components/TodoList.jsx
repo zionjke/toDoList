@@ -4,13 +4,8 @@ import TodoListTasks from "./TodoListTasks";
 import TodoListFooter from "./TodoListFooter";
 import TodoListTitle from "./Title/TodoListTitle";
 import {connect} from "react-redux";
-import {
-    changeTaskActionCreator,
-    createTaskActionCreator,
-    deleteTaskActionCreator,
-    setTaskAC
-} from "../redux/todolistsReducer";
-import {api} from "../dal/api";
+import {addTask, changeTodoTask, deleteTodoTask, getTodoTasks} from "../redux/todolistsReducer";
+
 import {withRouter} from "react-router-dom";
 
 class TodoList extends React.Component {
@@ -20,10 +15,8 @@ class TodoList extends React.Component {
     };
 
 
-    addTask = (newText) => {
-            api.addTask(newText,this.props.id).then(response => {
-                    this.props.addTask(response.data.item ,this.props.id)
-            });
+    addTask = (title) => {
+        this.props.addTask(title,this.props.id)
     };
 
     changeFilter = (newFilterValue) => {
@@ -33,7 +26,7 @@ class TodoList extends React.Component {
     };
 
     changeTask = (task,obj) => {
-       api.changeTask(task,obj,this.props.id).then( () => {this.props.updateTask(task.id,obj,this.props.id)});
+        this.props.changeTodoTask(task,obj,this.props.id)
     }
 
     changeStatus = (task, isDone) => {
@@ -46,17 +39,12 @@ class TodoList extends React.Component {
 
 
     deleteTask = (taskID) => {
-            api.deleteTask(this.props.id,taskID).then( () => {
-                    this.props.deleteTask(taskID,this.props.id)
-            });
-
+        this.props.deleteTodoTask(taskID,this.props.id)
     };
 
 
     componentDidMount() {
-            api.getTasks(this.props.id).then(response => {
-                    this.props.setTasks(this.props.id,response.items)
-            });
+        this.props.getTodoTasks(this.props.id)
     };
 
 
@@ -91,26 +79,7 @@ class TodoList extends React.Component {
     }
 }
 
-const mapDispatchToProps = (dispatch) => {
-    return {
-        addTask: (newTask, todolistId) => {
-            const action = createTaskActionCreator(newTask,todolistId);
-            dispatch(action)
-        },
-        updateTask: (taskId, obj,todolistId) => {
-            const action = changeTaskActionCreator(taskId,obj,todolistId);
-            dispatch(action)
-        },
-        deleteTask: (taskId,todolistId) => {
-            const action = deleteTaskActionCreator(taskId,todolistId);
-            dispatch(action)
-        },
-        setTasks: (todolistId,task) =>  {
-            const action = setTaskAC(todolistId,task);
-            dispatch(action)
-        }
-    }
-};
+
 let WithUrlDataContainerComponent =  withRouter(TodoList);
-export default connect(null, mapDispatchToProps)(WithUrlDataContainerComponent)
+export default connect(null, {addTask,changeTodoTask,deleteTodoTask,getTodoTasks})(WithUrlDataContainerComponent)
 

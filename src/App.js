@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from "react-redux";
-import {createTodoActionCreator, deleteTodoActionCreator, setTodoListAC} from "./redux/todolistsReducer";
-import {api} from "./dal/api";
+import {createTodoList, deleteTodoList, getTodoLists} from "./redux/todolistsReducer";
+
 import List from "./components/List/List";
 import TodoList from "./components/TodoList";
 import AddList from "./components/AddList/AddList";
@@ -23,26 +23,17 @@ class App extends React.Component {
 
 
     addTodoList = (title) => {
-        api.createTodolist(title)
-            .then(response => {
-                debugger
-                this.props.createTodolists(response.data.item)
-            })
+        this.props.createTodoList(title)
 
     };
 
-    deleteTodolist = (todolistId) => {
-        api.deleteTodo(todolistId).then(() => {
-            this.props.deleteTodo(todolistId)
-        });
+    deleteTodolist = (todoId) => {
+        this.props.deleteTodoList(todoId)
     };
 
 
     componentDidMount() {
-        api.getTodolist().then(response => {
-            this.props.getTodolists(response);
-            console.log(response)
-        });
+        this.props.getTodoLists()
     };
 
 
@@ -81,24 +72,9 @@ const mapStateToProps = (state) => {
     }
 };
 
-const mapDispatchToProps = (dispatch) => {
-    return {
-        createTodolists: (newTodolist) => {
-            const action = createTodoActionCreator(newTodolist);
-            dispatch(action)
-        },
-        getTodolists: (todolists) => {
-            const action = setTodoListAC(todolists);
-            dispatch(action)
-        },
-        deleteTodo: (todolistId) => {
-            const action = deleteTodoActionCreator(todolistId);
-            dispatch(action)
-        },
-    }
-};
 
-const ConnectedApp = connect(mapStateToProps, mapDispatchToProps)(App);
+
+const ConnectedApp = connect(mapStateToProps, {createTodoList,getTodoLists,deleteTodoList})(App);
 
 export default ConnectedApp;
 

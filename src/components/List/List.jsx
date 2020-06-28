@@ -2,7 +2,7 @@ import React from 'react'
 import removeSvg from '../../assets/img/remove.svg'
 import starSvg from '../../assets/img/star.svg'
 import './List.scss'
-import {api} from "../../dal/api";
+
 
 
 class List extends React.Component {
@@ -12,9 +12,6 @@ class List extends React.Component {
             this.props.deleteList(list.id)
         }
     };
-
-
-
 
     render() {
         return (
