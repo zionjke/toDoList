@@ -3,7 +3,7 @@ import axios from "axios";
 export const loginInstance = axios.create({
     baseURL:'https://social-network.samuraijs.com/api/1.1',
     withCredentials: true,
-})
+});
 
 const instance = axios.create({
     baseURL: "https://social-network.samuraijs.com/api/1.1/todo-lists",
@@ -43,5 +43,9 @@ export const api = {
             },
             )
             .then(response => response)
+    },
+
+    changeTodoTitle(todoId,title) {
+        return instance.put(`/${todoId}`,{title:title}).then(response=>response)
     }
 };
