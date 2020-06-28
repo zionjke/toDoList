@@ -5,7 +5,6 @@ import TodoListTitle from "./Title/TodoListTitle";
 import {connect} from "react-redux";
 import {addTask, changeTodoTask, deleteTodoTask, editTodoTitle, getTodoTasks} from "../redux/todolistsReducer";
 
-import {withRouter} from "react-router-dom";
 import AddTaskForm from "./AddTask/AddTaskForm";
 
 class TodoList extends React.Component {
@@ -85,7 +84,6 @@ class TodoList extends React.Component {
         );
     }
 }
-
 
 
 export default connect(null, {

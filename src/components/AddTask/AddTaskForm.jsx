@@ -26,7 +26,8 @@ class AddTaskForm extends React.Component {
                         <AddNewItemForm cancelButton
                                         btnname='Добавить задачу'
                                         addItem={this.props.addTask}
-                                        toggleFormVisible={this.toggleFormVisible}/>
+                                        toggleFormVisible={this.toggleFormVisible}
+                                        placeholder='Имя задачи'/>
                     </div>
                 }
             </div>

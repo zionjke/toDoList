@@ -45,6 +45,7 @@ class AddNewItemForm extends React.Component {
         return (
                     <>
                         <input
+                            placeholder={this.props.placeholder}
                             className={`field ${classForInput}`}
                             onChange={this.onTitleChanged}
                             onKeyPress={this.onKeyPress}

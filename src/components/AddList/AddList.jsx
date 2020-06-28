@@ -41,7 +41,8 @@ class AddList extends React.Component {
                     />
                     <AddNewItemForm btnname='Добавить список'
                                     addItem={this.props.addTodoList}
-                                    closePopup={this.closePopup}/>
+                                    closePopup={this.closePopup}
+                                    placeholder='Название списка'/>
                 </div> }
             </div>
         )
