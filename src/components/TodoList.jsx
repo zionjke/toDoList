@@ -43,7 +43,7 @@ class TodoList extends React.Component {
 
     changeTodoTitle = (title) => {
         this.props.editTodoTitle(this.props.id, title)
-    }
+    };
 
 
     componentDidMount() {

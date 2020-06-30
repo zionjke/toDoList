@@ -14,13 +14,13 @@ class AddList extends React.Component {
         this.setState({
             visiblePopup: true
         })
-    }
+    };
 
     closePopup = () => {
         this.setState({
             visiblePopup: false
         })
-    }
+    };
 
     render() {
         return(
