@@ -1,5 +1,6 @@
 import React from 'react';
 import './Tasks.scss'
+import * as dateformat from "dateformat";
 
 class TodoListTask extends React.Component {
 
@@ -29,6 +30,11 @@ class TodoListTask extends React.Component {
     };
 
     render = () => {
+
+
+        let addedDate = dateformat(this.props.task.addedDate, "default")
+
+
 
         let isDone = this.props.task.status === 2;
         let classForTask = isDone ? "task done" : "task";
