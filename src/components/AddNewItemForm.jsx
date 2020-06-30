@@ -18,9 +18,9 @@ class AddNewItemForm extends React.Component {
                 error: false,
                 title: ""
             });
-            this.props.addItem(newTitle)
-            {this.props.closePopup && this.props.closePopup()}
-            {this.props.toggleFormVisible && this.props.toggleFormVisible()}
+            this.props.addItem(newTitle);
+            this.props.closePopup && this.props.closePopup();
+            this.props.toggleFormVisible && this.props.toggleFormVisible();
         }
 
     };
