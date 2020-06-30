@@ -12,7 +12,7 @@ class TodoListTask extends React.Component {
     };
 
     deactivatedEditMode = (e) => {
-        this.props.changeTitle(this.props.task, e.currentTarget.value)
+        this.props.changeTitle(this.props.task, e.currentTarget.value);
         this.setState({isEditMode: false})
     };
 
@@ -30,11 +30,11 @@ class TodoListTask extends React.Component {
 
     render = () => {
 
-        let isDone = this.props.task.status === 2
-        // let classForTask = isDone ? "todoList-task done" : "todoList-task";
+        let isDone = this.props.task.status === 2;
+        let classForTask = isDone ? "task done" : "task";
 
         return (
-            <div className="task">
+            <div className={classForTask}>
                 <div className="checkbox">
                     <input
                         id={`task-${this.props.task.id}`}
