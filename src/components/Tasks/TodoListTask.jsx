@@ -33,6 +33,7 @@ class TodoListTask extends React.Component {
 
 
         let addedDate = dateformat(this.props.task.addedDate, "default")
+        console.log(addedDate)
 
 
 

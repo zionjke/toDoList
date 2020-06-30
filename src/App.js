@@ -8,6 +8,7 @@ import TodoList from "./components/TodoList";
 import AddList from "./components/AddList/AddList";
 import Login from "./components/Login/Login";
 import {setActiveList} from "./actions/todolist";
+import {Route} from "react-router-dom";
 
 
 class App extends React.Component {
@@ -38,8 +39,8 @@ class App extends React.Component {
 
         return (
             <div className='todo'>
-                {/*<Route path='/login' render={() => <Login/>}/>*/}
                 <div className="todo__sidebar">
+                    <Route path='/login' render={() => <Login/>}/>
                     <List lists={this.props.todolist}
                           onClickList={this.onClickList}
                           activeList={this.props.activelist}

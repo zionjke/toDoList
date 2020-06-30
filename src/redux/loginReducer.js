@@ -1,13 +1,12 @@
 import {loginInstance} from "../dal/api";
+import { SET_MESSAGE, SET_STATUS, setMessage, setStatus} from "../actions/authLogin";
 
-
-const LOGIN = 'LOGIN';
-
-const statuses = {
+export const statuses = {
     INIT: 'INIT',
     ERROR: 'ERROR',
     INPROGRESS: 'INPROGRESS',
-    CAPTCHAREQUIRED: 'CAPTCHAREQUIRED'
+    CAPTCHAREQUIRED: 'CAPTCHAREQUIRED',
+    SUCCESS: 'SUCCESS'
 };
 
 const initialState = {
@@ -19,20 +18,34 @@ const initialState = {
 
 const loginReducer = (state=initialState,action) => {
     switch (action.type) {
-        case LOGIN:
-            return{
+        case SET_STATUS:
+            return {
                 ...state,
-
+                status: action.status
+            }
+        case SET_MESSAGE:
+            return {
+                ...state,
+                message: action.message
             }
     }
     return state
 };
 
-export const setStatus = (login,password,remembermy,) => (dispatch) => {
+export const login = (email,password,rememberMe,) => (dispatch) => {
+    dispatch(setStatus(statuses.INPROGRESS));
     loginInstance.post('auth/login', {
-        login,password,remembermy
+        email,
+        password,
+        rememberMe
     }).then((response) => {
-        debugger
+        if(response.data.resultCode === 0) {
+            dispatch(setStatus(statuses.SUCCESS));
+            alert('Вы залогинились')
+        } else {
+            dispatch(setStatus(statuses.ERROR))
+            dispatch(setMessage(response.data.messages[0]))
+        }
     })
 };
 
