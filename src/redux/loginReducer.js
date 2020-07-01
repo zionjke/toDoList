@@ -1,13 +1,8 @@
 import {loginInstance} from "../dal/api";
-import { SET_MESSAGE, SET_STATUS, setMessage, setStatus} from "../actions/authLogin";
+import {SET_MESSAGE, SET_STATUS, setMessage, setStatus, statuses} from "../actions/login";
+import {setIsAuth} from "../actions/auth";
+import {authMe} from "./authReducer";
 
-export const statuses = {
-    INIT: 'INIT',
-    ERROR: 'ERROR',
-    INPROGRESS: 'INPROGRESS',
-    CAPTCHAREQUIRED: 'CAPTCHAREQUIRED',
-    SUCCESS: 'SUCCESS'
-};
 
 const initialState = {
     isAuth:'',
@@ -22,7 +17,7 @@ const loginReducer = (state=initialState,action) => {
             return {
                 ...state,
                 status: action.status
-            }
+            };
         case SET_MESSAGE:
             return {
                 ...state,
@@ -41,13 +36,15 @@ export const login = (email,password,rememberMe,) => (dispatch) => {
     }).then((response) => {
         if(response.data.resultCode === 0) {
             dispatch(setStatus(statuses.SUCCESS));
-            alert('Вы залогинились')
+            dispatch(setIsAuth(true));
+            dispatch(authMe())
         } else {
-            dispatch(setStatus(statuses.ERROR))
+            dispatch(setStatus(statuses.ERROR));
             dispatch(setMessage(response.data.messages[0]))
         }
     })
 };
+
 
 
 export default loginReducer

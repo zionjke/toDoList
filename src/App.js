@@ -9,6 +9,7 @@ import AddList from "./components/AddList/AddList";
 import Login from "./components/Login/Login";
 import {setActiveList} from "./actions/todolist";
 import {Route} from "react-router-dom";
+import Header from "./components/Header";
 
 
 class App extends React.Component {
@@ -36,28 +37,31 @@ class App extends React.Component {
 
     render = () => {
 
-
         return (
-            <div className='todo'>
-                <div className="todo__sidebar">
-                    <Route path='/login' render={() => <Login/>}/>
-                    <List lists={this.props.todolist}
-                          onClickList={this.onClickList}
-                          activeList={this.props.activelist}
-                          deleteList={this.deleteTodolist}/>
-                    <AddList addTodoList={this.addTodoList}/>
+            <>
+                <Route path='/login' render={() => <Login/>}/>
+                <Header/>
+                <div className='todo'>
+                    <div className="todo__sidebar">
+                        <List lists={this.props.todolist}
+                              onClickList={this.onClickList}
+                              activeList={this.props.activelist}
+                              deleteList={this.deleteTodolist}/>
+                        <AddList addTodoList={this.addTodoList}/>
+                    </div>
+                    <div className="todo__lists">
+                        {this.props.todolist.map(todo => {
+                            if(todo.id === this.props.activelist.id) {
+                                return <TodoList key={todo.id}
+                                                 id={todo.id}
+                                                 title={todo.title}
+                                                 tasks={todo.tasks}/>
+                            }
+                        })}
+                    </div>
                 </div>
-                <div className="todo__lists">
-                    {this.props.todolist.map(todo => {
-                        if(todo.id === this.props.activelist.id) {
-                           return <TodoList key={todo.id}
-                                      id={todo.id}
-                                      title={todo.title}
-                                      tasks={todo.tasks}/>
-                        }
-                    })}
-                </div>
-            </div>
+            </>
+
         );
     }
 }

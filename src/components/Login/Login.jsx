@@ -1,8 +1,14 @@
 import React from 'react'
 import {connect} from "react-redux";
-import {login, statuses} from "../../redux/loginReducer";
+import {login} from "../../redux/loginReducer";
+import {statuses} from "../../actions/login";
+import {Redirect} from "react-router-dom";
 
-export const Login = ({status,message,login}) => {
+export const Login = ({status,message,login,isAuth}) => {
+
+    if(isAuth) {
+        return <Redirect to='/'/>
+    }
 
     let emailRef = React.createRef();
     let passwordRef = React.createRef();
@@ -36,7 +42,7 @@ const onClickLogin = () => {
 
 const mapStateToProps = (state) => {
     return {
-        // isAuth: state.login.isAuth,
+        isAuth: state.auth.isAuth,
         status: state.login.status,
         message: state.login.message,
         captchaUrl: state.login.captchaUrl
