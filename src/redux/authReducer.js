@@ -1,5 +1,6 @@
 import {SET_IS_AUTH, SET_USER_INFO, setIsAuth, setUserInfo} from "../actions/auth";
 import {loginInstance} from "../dal/api";
+import {getTodoLists} from "./todolistsReducer";
 
 const initialState = {
     isAuth:false,
@@ -41,7 +42,7 @@ export const authMe = () => (dispatch) => {
 export const logOut = () => (dispatch) => {
     loginInstance.delete('auth/login').then(() => {
         dispatch(setIsAuth(false))
-
+        window.location.reload(false);
     })
 };
 

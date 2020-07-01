@@ -1,10 +1,12 @@
 import React from 'react'
 import {NavLink} from "react-router-dom";
 import {connect} from "react-redux";
-import {authMe, logOut} from "../redux/authReducer";
+import {authMe, logOut} from "../../redux/authReducer";
+import loginIcon from '../../assets/img/login.png'
+import './LoginBlock.scss'
 
 
-class Header extends React.Component {
+class LoginBlock extends React.Component {
 
     componentDidMount() {
         this.props.authMe()
@@ -17,10 +19,12 @@ class Header extends React.Component {
     render() {
         const {isAuth,userInfo} = this.props;
         return (
-            <div>
+            <div className='login__block'>
                 {isAuth && <div>{userInfo.login} - <span onClick={this.onLogOutClick}>Log Out</span></div>}
                 {!isAuth && <div>
-                    <NavLink to='/login'>Sign In</NavLink>
+                    <NavLink to='/login'>
+                        <img src={loginIcon} alt=""/>
+                    </NavLink>
                 </div>}
             </div>
         )
@@ -34,4 +38,4 @@ const mapStateToProps = (state) => {
     }
 };
 
-export default connect(mapStateToProps,{authMe,logOut})(Header)
+export default connect(mapStateToProps,{authMe,logOut})(LoginBlock)

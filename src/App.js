@@ -6,10 +6,11 @@ import {createTodoList, deleteTodoList, getTodoLists} from "./redux/todolistsRed
 import List from "./components/List/List";
 import TodoList from "./components/TodoList";
 import AddList from "./components/AddList/AddList";
-import Login from "./components/Login/Login";
+import Login, {LoginForm} from "./components/LoginForm/LoginForm";
 import {setActiveList} from "./actions/todolist";
 import {Route} from "react-router-dom";
-import Header from "./components/Header";
+import Header from "./components/LoginForm/LoginBlock";
+import LoginBlock from "./components/LoginForm/LoginBlock";
 
 
 class App extends React.Component {
@@ -39,10 +40,10 @@ class App extends React.Component {
 
         return (
             <>
-                <Route path='/login' render={() => <Login/>}/>
-                <Header/>
                 <div className='todo'>
+                    <Route path='/login' render={() => <LoginForm/>}/>
                     <div className="todo__sidebar">
+                        <LoginBlock/>
                         <List lists={this.props.todolist}
                               onClickList={this.onClickList}
                               activeList={this.props.activelist}

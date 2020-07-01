@@ -3,8 +3,9 @@ import {connect} from "react-redux";
 import {login} from "../../redux/loginReducer";
 import {statuses} from "../../actions/login";
 import {Redirect} from "react-router-dom";
+import './LoginForm.scss'
 
-export const Login = ({status,message,login,isAuth}) => {
+export const LoginForm = ({status,message,login,isAuth}) => {
 
     if(isAuth) {
         return <Redirect to='/'/>
@@ -21,15 +22,15 @@ const onClickLogin = () => {
 };
 
     return (
-        <div>
-            <div><input ref={emailRef} defaultValue='vincere802@gmail.com' type="text"/></div>
-            <div><input ref={passwordRef} defaultValue='eok2Ydkm'  type="password"/></div>
-            <div><input ref={rememberMeRef} type="checkbox"/></div>
-            <div>
-                <button disabled={status === statuses.INPROGRESS} onClick={onClickLogin}>
-                    Login
+        <div className='login__form'>
+            <h2>Login</h2>
+            <input className='field' ref={emailRef} placeholder='Введите свой email' type="text"/>
+            <input  className='field' ref={passwordRef} placeholder='Введите пароль'  type="password"/>
+            <span>Remember my:</span><input ref={rememberMeRef} type="checkbox"/>
+                <button className='button' disabled={status === statuses.INPROGRESS} onClick={onClickLogin}>
+                    Sign in
                 </button>
-            </div>
+
             {
                 status === statuses.ERROR &&
             <div className='error'>
@@ -49,4 +50,4 @@ const mapStateToProps = (state) => {
     }
 };
 
-export default connect(mapStateToProps,{login})(Login)
+export default connect(mapStateToProps,{login})(LoginForm)
