@@ -3,27 +3,30 @@ import {NavLink} from "react-router-dom";
 import {connect} from "react-redux";
 import {authMe, logOut} from "../../redux/authReducer";
 import loginIcon from '../../assets/img/login.png'
-import './LoginBlock.scss'
+import './AuthBlock.scss'
+import logOutIcon from './../../assets/img/log-out.png'
 
 
-class LoginBlock extends React.Component {
+class AuthBlock extends React.Component {
 
     componentDidMount() {
         this.props.authMe()
     }
 
     onLogOutClick = () => {
-        this.props.logOut()
+        if(window.confirm('Вы действительно хотите выйти?')) {
+            this.props.logOut()
+        }
     };
 
     render() {
-        const {isAuth,userInfo} = this.props;
+        const {isAuth} = this.props;
         return (
-            <div className='login__block'>
-                {isAuth && <div>{userInfo.login} - <span onClick={this.onLogOutClick}>Log Out</span></div>}
+            <div className='auth__block'>
+                {isAuth && <img className={'auth__block-logout'} onClick={this.onLogOutClick} src={logOutIcon} alt="Log Out Icon"/>}
                 {!isAuth && <div>
                     <NavLink to='/login'>
-                        <img src={loginIcon} alt=""/>
+                        <img className='auth__block-login' src={loginIcon} alt="Login Icon"/>
                     </NavLink>
                 </div>}
             </div>
@@ -38,4 +41,4 @@ const mapStateToProps = (state) => {
     }
 };
 
-export default connect(mapStateToProps,{authMe,logOut})(LoginBlock)
+export default connect(mapStateToProps,{authMe,logOut})(AuthBlock)

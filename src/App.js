@@ -1,16 +1,13 @@
 import React from 'react';
 import {connect} from "react-redux";
-
 import {createTodoList, deleteTodoList, getTodoLists} from "./redux/todolistsReducer";
-
 import List from "./components/List/List";
 import TodoList from "./components/TodoList";
 import AddList from "./components/AddList/AddList";
-import Login, {LoginForm} from "./components/LoginForm/LoginForm";
 import {setActiveList} from "./actions/todolist";
 import {Route} from "react-router-dom";
-import Header from "./components/LoginForm/LoginBlock";
-import LoginBlock from "./components/LoginForm/LoginBlock";
+import LoginForm from "./components/LoginForm/LoginForm";
+import AuthBlock from "./components/LoginForm/AuthBlock";
 
 
 class App extends React.Component {
@@ -39,11 +36,10 @@ class App extends React.Component {
     render = () => {
 
         return (
-            <>
                 <div className='todo'>
                     <Route path='/login' render={() => <LoginForm/>}/>
                     <div className="todo__sidebar">
-                        <LoginBlock/>
+                        <AuthBlock/>
                         <List lists={this.props.todolist}
                               onClickList={this.onClickList}
                               activeList={this.props.activelist}
@@ -61,8 +57,6 @@ class App extends React.Component {
                         })}
                     </div>
                 </div>
-            </>
-
         );
     }
 }
