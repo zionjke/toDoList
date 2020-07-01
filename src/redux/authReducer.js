@@ -41,6 +41,7 @@ export const authMe = () => (dispatch) => {
 export const logOut = () => (dispatch) => {
     loginInstance.delete('auth/login').then(() => {
         dispatch(setIsAuth(false))
+
     })
 };
 
