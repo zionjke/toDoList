@@ -42,7 +42,7 @@ export const authMe = () => (dispatch) => {
 export const logOut = () => (dispatch) => {
     loginInstance.delete('auth/login').then(() => {
         dispatch(setIsAuth(false))
-        window.location.reload(false);
+        window.location.reload(false); // refresh page
     })
 };
 
