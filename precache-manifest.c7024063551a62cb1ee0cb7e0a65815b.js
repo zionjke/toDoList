@@ -1,19 +1,19 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "9f929d4e310c922663969704128c4af6",
+    "revision": "2ab6a7c4838448966b252959ed85a2dc",
     "url": "/toDoList/index.html"
   },
   {
-    "revision": "b934ee8106c747c61641",
-    "url": "/toDoList/static/css/main.7d3f48f9.chunk.css"
+    "revision": "765d8c2d358c710ceef3",
+    "url": "/toDoList/static/css/main.c6218525.chunk.css"
   },
   {
-    "revision": "37900ea0ea0c14b81292",
-    "url": "/toDoList/static/js/2.e5920d83.chunk.js"
+    "revision": "a20e8940e4dc3cfc6337",
+    "url": "/toDoList/static/js/2.bf33dcd1.chunk.js"
   },
   {
-    "revision": "b934ee8106c747c61641",
-    "url": "/toDoList/static/js/main.149d2269.chunk.js"
+    "revision": "765d8c2d358c710ceef3",
+    "url": "/toDoList/static/js/main.da1e30b8.chunk.js"
   },
   {
     "revision": "9722a55e69eb4ad6e976",
@@ -22,6 +22,10 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
     "revision": "78cc821587c8145935bfc5b01738d502",
     "url": "/toDoList/static/media/add.78cc8215.svg"
+  },
+  {
+    "revision": "d563717dbc34ab65d4a64023354f95b0",
+    "url": "/toDoList/static/media/calendar.d563717d.svg"
   },
   {
     "revision": "1175686f65f8ace80847eb94547123c0",
