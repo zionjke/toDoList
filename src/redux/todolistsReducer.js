@@ -10,7 +10,7 @@ import {api} from "../dal/api";
 
 const initialState = {
     todolists: [],
-    activeList: ''
+    activeList: {}
 };
 
 const todolistsReducer = (state = initialState, action) => {
@@ -115,7 +115,7 @@ const todolistsReducer = (state = initialState, action) => {
                         }
                     }
                 })
-            }
+            };
         case SET_ACTIVE_LIST:
             return {
                 ...state,

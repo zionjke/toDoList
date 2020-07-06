@@ -16,14 +16,35 @@ margin-top: 30px;
   }
 
   .task {
+    flex-wrap: wrap;
     display: flex;
     align-items: center;
     margin-bottom: 15px;
     cursor: pointer;
 
-
     &:hover .delete_task {
       opacity: 1;
+    }
+
+    &-priority {
+      display: flex;
+    }
+
+    &-date {
+      width: 40%;
+      margin-left: 40px;
+      opacity: 0.8;
+      img {
+        width: 13px;
+        height: 13px;
+        margin: 0;
+      }
+
+      .date {
+        font-size: 10px;
+        margin-left: 7px;
+        color: #4dd599;
+      }
     }
 
 
@@ -32,6 +53,7 @@ margin-top: 30px;
       margin-left: 15px;
       border: 0;
       font-size: 16px;
+      width: 80%;
     }
 
     input {
@@ -42,6 +64,7 @@ margin-top: 30px;
       padding: 8px 12px;
       font-size: 16px;
       margin-left: 15px;
+      width: 80%;
 
       &:focus {
         border-color: #dbdbdb;
@@ -107,7 +130,6 @@ margin-top: 30px;
       display: flex;
       opacity: 0;
       transition: opacity 0.15s ease-in-out;
-      margin-left: 70px;
 
       div {
         display: flex;

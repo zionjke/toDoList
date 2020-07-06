@@ -1,6 +1,7 @@
 import React from 'react';
 import './Tasks.scss'
 import * as dateformat from "dateformat";
+import calendarSvg from './../../assets/img/calendar.svg'
 
 class TodoListTask extends React.Component {
 
@@ -31,12 +32,7 @@ class TodoListTask extends React.Component {
 
     render = () => {
 
-
-        let addedDate = dateformat(this.props.task.addedDate, "default")
-        console.log(addedDate)
-
-
-
+        let addedDate = dateformat(this.props.task.addedDate, "default");
         let isDone = this.props.task.status === 2;
         let classForTask = isDone ? "task done" : "task";
 
@@ -93,11 +89,16 @@ class TodoListTask extends React.Component {
                         </svg>
                     </div>
                 </div>
+                <div className='task-date'>
+                    <img src={calendarSvg} alt="Calendar Icon"/>
+                    <span className='date'>{addedDate}</span>
+                </div>
+                <div className='task-priority'>
+
+                </div>
             </div>
         );
     }
-
-
 }
 
 

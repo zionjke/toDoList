@@ -26,10 +26,14 @@ class TodoList extends React.Component {
 
     changeTask = (task, obj) => {
         this.props.changeTodoTask(task, obj, this.props.id)
-    }
+    };
 
     changeStatus = (task, isDone) => {
         this.changeTask(task, {status: isDone ? 2 : 0});
+    };
+
+    changePriority = (task,priority) => {
+        this.changeTask(task,{priority:priority})
     };
 
     editTaskTitle = (task, newTitle) => {
@@ -74,7 +78,8 @@ class TodoList extends React.Component {
                 <TodoListTasks changeStatus={this.changeStatus}
                                changeTitle={this.editTaskTitle}
                                tasks={filteredTask}
-                               deleteTask={this.deleteTask}/>
+                               deleteTask={this.deleteTask}
+                               changePriority={this.changePriority}/>
                 <TodoListFooter changeFilter={this.changeFilter}
                                 filterValue={this.state.filterValue}
                                 tasks={this.props.tasks}/>
@@ -84,7 +89,6 @@ class TodoList extends React.Component {
         );
     }
 }
-
 
 export default connect(null, {
     addTask,

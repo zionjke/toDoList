@@ -34,29 +34,29 @@ class App extends React.Component {
 
 
     render = () => {
-
         return (
-                <div className='todo'>
-                    <Route path='/login' render={() => <LoginForm/>}/>
-                    <div className="todo__sidebar">
-                        <AuthBlock/>
-                        <List lists={this.props.todolist}
-                              onClickList={this.onClickList}
-                              activeList={this.props.activelist}
-                              deleteList={this.deleteTodolist}/>
-                        <AddList addTodoList={this.addTodoList}/>
-                    </div>
-                    <div className="todo__lists">
-                        {this.props.todolist.map(todo => {
-                            if(todo.id === this.props.activelist.id) {
-                                return <TodoList key={todo.id}
-                                                 id={todo.id}
-                                                 title={todo.title}
-                                                 tasks={todo.tasks}/>
-                            }
-                        })}
-                    </div>
+            <div className='todo'>
+                <Route path='/login' render={() => <LoginForm/>}/>
+                <div className="todo__sidebar">
+                    <AuthBlock/>
+                    <List lists={this.props.todolist}
+                          onClickList={this.onClickList}
+                          activeList={this.props.activelist}
+                          deleteList={this.deleteTodolist}/>
+
+                    <AddList addTodoList={this.addTodoList}/>
                 </div>
+                <div className="todo__lists">
+                    {this.props.todolist.map(todo => {
+                        if (todo.id === this.props.activelist.id) {
+                            return <TodoList key={todo.id}
+                                             id={todo.id}
+                                             title={todo.title}
+                                             tasks={todo.tasks}/>
+                        }
+                    })}
+                </div>
+            </div>
         );
     }
 }
@@ -71,8 +71,7 @@ const mapStateToProps = (state) => {
 };
 
 
-
-const ConnectedApp = connect(mapStateToProps, {createTodoList,getTodoLists,deleteTodoList,setActiveList})(App);
+const ConnectedApp = connect(mapStateToProps, {createTodoList, getTodoLists, deleteTodoList, setActiveList})(App);
 
 export default ConnectedApp;
 

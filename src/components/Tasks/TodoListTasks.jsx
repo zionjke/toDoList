@@ -5,11 +5,12 @@ import './Tasks.scss'
 class TodoListTasks extends React.Component {
     render = () => {
 
-        let taskItem = this.props.tasks.map ( task => <TodoListTask key={task.id}
+        let taskItem = this.props.tasks.map(task => <TodoListTask key={task.id}
                                                                   task={task}
                                                                   changeStatus={this.props.changeStatus}
                                                                   changeTitle={this.props.changeTitle}
-                                                                  deleteTask={this.props.deleteTask}/>);
+                                                                  deleteTask={this.props.deleteTask}
+                                                                  changePriority={this.props.changePriority}/>);
 
         return (
             <div className="todo__tasks">
