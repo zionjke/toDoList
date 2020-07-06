@@ -37,14 +37,16 @@ class TodoListTask extends React.Component {
         let classForTask = isDone ? "task done" : "task";
         let taskPriorityStyle;
 
-        if(this.props.task.priority === 2) {
-            taskPriorityStyle = 'low'
-        }
-        if(this.props.task.priority === 3) {
-            taskPriorityStyle = 'medium'
-        }
-        if(this.props.task.priority === 4) {
-            taskPriorityStyle = 'high'
+        switch (this.props.task.priority) {
+            case 2:
+                taskPriorityStyle = 'low';
+                break;
+            case 3:
+                taskPriorityStyle = 'medium';
+                break;
+            case 4:
+                taskPriorityStyle = 'high';
+                break;
         }
 
         return (
