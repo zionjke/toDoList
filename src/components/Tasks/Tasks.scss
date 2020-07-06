@@ -15,21 +15,23 @@ margin-top: 30px;
   }
 
   .low {
-    background: #ccff99;
+    border: 2px dotted green;
+    box-shadow: 1px 2px 20px green;
   }
 
   .medium {
-    background:#ffc299;
+    border: 2px dotted #ff6600;
+    box-shadow: 1px 2px 20px #ff6600;
   }
 
   .high {
-    background:  #ffb3b3;
+    border: 2px dotted red;
+    box-shadow: 1px 2px 20px red;
   }
 
   .task {
     box-shadow: 1px 2px 20px #f3f3f3;
     border-radius: 12px;
-    border: 1px solid #f1f1f1;
     padding: 10px;
     flex-wrap: wrap;
     display: flex;
