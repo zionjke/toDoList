@@ -36,6 +36,9 @@ class TodoListTask extends React.Component {
         let isDone = this.props.task.status === 2;
         let classForTask = isDone ? "task done" : "task";
 
+        console.log(this.props.task)
+
+
         return (
             <div className={classForTask}>
                 <div className="checkbox">
@@ -94,7 +97,9 @@ class TodoListTask extends React.Component {
                     <span className='date'>{addedDate}</span>
                 </div>
                 <div className='task-priority'>
-
+                    <div  className='task-priority_low'></div>
+                    <div className='task-priority_medium'></div>
+                    <div className='task-priority_high'></div>
                 </div>
             </div>
         );

@@ -12,7 +12,6 @@ margin-top: 30px;
 
   .done {
     opacity: 0.4;
-    text-decoration: line-through;
   }
 
   .task {
@@ -28,6 +27,27 @@ margin-top: 30px;
 
     &-priority {
       display: flex;
+      &_low {
+        width: 15px;
+        height: 15px;
+        border-radius: 50%;
+        background: #4dd599;
+        margin-right: 3px;
+      }
+      &_medium {
+        width: 15px;
+        height: 15px;
+        border-radius: 50%;
+        background:orange;
+        margin-right: 3px;
+      }
+      &_high {
+        width: 15px;
+        height: 15px;
+        border-radius: 50%;
+        background:red;
+        margin-right: 3px;
+      }
     }
 
     &-date {
