@@ -35,12 +35,20 @@ class TodoListTask extends React.Component {
         let addedDate = dateformat(this.props.task.addedDate, "default");
         let isDone = this.props.task.status === 2;
         let classForTask = isDone ? "task done" : "task";
+        let taskPriorityStyle;
 
-        console.log(this.props.task)
-
+        if(this.props.task.priority === 2) {
+            taskPriorityStyle = 'low'
+        }
+        if(this.props.task.priority === 3) {
+            taskPriorityStyle = 'medium'
+        }
+        if(this.props.task.priority === 4) {
+            taskPriorityStyle = 'high'
+        }
 
         return (
-            <div className={classForTask}>
+            <div className={`${classForTask} ${taskPriorityStyle}`}>
                 <div className="checkbox">
                     <input
                         id={`task-${this.props.task.id}`}
@@ -97,9 +105,9 @@ class TodoListTask extends React.Component {
                     <span className='date'>{addedDate}</span>
                 </div>
                 <div className='task-priority'>
-                    <div  className='task-priority_low'></div>
-                    <div className='task-priority_medium'></div>
-                    <div className='task-priority_high'></div>
+                    <div onClick={() => this.props.changePriority(this.props.task,2)} className='task-priority_low'></div>
+                    <div onClick={() => this.props.changePriority(this.props.task,3)} className='task-priority_medium'></div>
+                    <div onClick={() => this.props.changePriority(this.props.task,4)} className='task-priority_high'></div>
                 </div>
             </div>
         );
