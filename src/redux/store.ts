@@ -4,11 +4,14 @@ import todolistsReducer from "./todolistsReducer";
 import thunk from "redux-thunk";
 import authReducer from "./authReducer";
 
-
-const store = createStore(combineReducers({
+const rootReducer = combineReducers({
     login: loginReducer,
     todolist: todolistsReducer,
     auth: authReducer
-}),applyMiddleware(thunk));
+});
+
+export type AppStateType = ReturnType<typeof rootReducer>
+
+const store = createStore(rootReducer,applyMiddleware(thunk));
 
 export default store

@@ -1,19 +1,33 @@
 import {
     CHANGE_TASK,
-    CHANGE_TODO_TITLE, changeTodoTitle,
+    CHANGE_TODO_TITLE,
     CREATE_TASK,
-    CREATE_TODOLIST, createTask, createTodo, DELETE_TASK, DELETE_TODO, deleteTask, deleteTodo, SET_ACTIVE_LIST,
+    CREATE_TODOLIST,
+    createTodoAC,
+    DELETE_TASK,
+    DELETE_TODO,
+    SET_ACTIVE_LIST,
     SET_TODOLISTS,
-    SET_TODOLISTS_TASKS, setTasks, setTodoList, updateTask
+    SET_TODOLISTS_TASKS,
+    TodoActionTypes,
+    setTodoListAC, setTasksAC, createTaskAC, deleteTodoAC, changeTodoTitleAC, deleteTaskAC, updateTaskAC
 } from "../actions/todolist";
 import {api} from "../dal/api";
+import {TaskType, TodoType, UpdateTaskType} from "../types/entities";
+import {ThunkAction, ThunkDispatch} from "redux-thunk";
+import {AppStateType} from "./store";
 
-const initialState = {
+type InitialStateType = {
+    todolists: Array<TodoType>
+    activeList: any
+}
+
+const initialState: InitialStateType = {
     todolists: [],
     activeList: {}
 };
 
-const todolistsReducer = (state = initialState, action) => {
+const todolistsReducer = (state: InitialStateType = initialState, action: TodoActionTypes): InitialStateType => {
     switch (action.type) {
         case SET_TODOLISTS:
             return {
@@ -28,13 +42,13 @@ const todolistsReducer = (state = initialState, action) => {
         case SET_TODOLISTS_TASKS:
             return {
                 ...state,
-                todolists: state.todolists.map (todo => {
-                    if(todo.id !== action.todolistId) {
+                todolists: state.todolists.map(todo => {
+                    if (todo.id !== action.todolistId) {
                         return todo
                     } else {
                         return {
                             ...todo,
-                            tasks: action.task
+                            tasks: action.tasks
                         }
                     }
                 })
@@ -82,11 +96,11 @@ const todolistsReducer = (state = initialState, action) => {
                     }
                 })
             };
-        case CHANGE_TODO_TITLE:{
+        case CHANGE_TODO_TITLE: {
             return {
                 ...state,
                 todolists: state.todolists.map(todo => {
-                    if(todo.id !== action.todolistId){
+                    if (todo.id !== action.todolistId) {
                         return todo
                     } else {
                         return {
@@ -126,54 +140,55 @@ const todolistsReducer = (state = initialState, action) => {
     return state;
 };
 
-export const createTodoList = (title) => (dispatch) => {
+type ThunkType = ThunkAction<void, AppStateType, unknown, TodoActionTypes>
+
+export const createTodoList = (title: string): ThunkType => (dispatch: ThunkDispatch<AppStateType, unknown, TodoActionTypes>) => {
     api.createTodolist(title).then(response => {
-        dispatch(createTodo(response.data.item))
+        dispatch(createTodoAC(response.data.data.item))
     });
 };
 
-export const getTodoLists = () => (dispatch) => {
+export const getTodoLists = (): ThunkType => (dispatch: ThunkDispatch<AppStateType, unknown, TodoActionTypes>) => {
     api.getTodolist().then(response => {
-        dispatch(setTodoList(response))
+        dispatch(setTodoListAC(response.data))
     });
 };
 
-export const getTodoTasks = (todoId) => (dispatch) => {
+export const getTodoTasks = (todoId: string): ThunkType => (dispatch: ThunkDispatch<AppStateType, unknown, TodoActionTypes>) => {
     api.getTasks(todoId).then(response => {
-        dispatch(setTasks(todoId, response.items))
+        dispatch(setTasksAC(todoId, response.data.items))
     })
 };
 
-export const addTask = (title, todoId) => (dispatch) => {
-    api.addTask(title, todoId).then(response => {
-        dispatch(createTask(response.data.item, todoId))
+export const addTask = (title: string, todoId: string): ThunkType => (dispatch: ThunkDispatch<AppStateType, unknown, TodoActionTypes>) => {
+    api.createTask(title, todoId).then(response => {
+        dispatch(createTaskAC(response.data.data.item, todoId))
     });
 };
 
-export const deleteTodoList = (todoId) => (dispatch) => {
+export const deleteTodoList = (todoId: string): ThunkType => (dispatch: ThunkDispatch<AppStateType, unknown, TodoActionTypes>) => {
     api.deleteTodo(todoId).then(() => {
-        dispatch(deleteTodo(todoId))
+        dispatch(deleteTodoAC(todoId))
     });
 };
 
-export const editTodoTitle = (todoId, title) => (dispatch) => {
+export const editTodoTitle = (todoId: string, title: string): ThunkType => (dispatch: ThunkDispatch<AppStateType, unknown, TodoActionTypes>) => {
     api.changeTodoTitle(todoId, title).then(() => {
-        dispatch(changeTodoTitle(todoId, title))
+        dispatch(changeTodoTitleAC(todoId, title))
     })
 };
 
-export const deleteTodoTask = (taskId, todoId) => (dispatch) => {
+export const deleteTodoTask = (taskId: string, todoId: string): ThunkType => (dispatch: ThunkDispatch<AppStateType, unknown, TodoActionTypes>) => {
     api.deleteTask(todoId, taskId).then(() => {
-        dispatch(deleteTask(taskId, todoId))
+        dispatch(deleteTaskAC(taskId, todoId))
     });
 };
 
-export const changeTodoTask = (task, obj, todoId) => (dispatch) => {
+export const changeTodoTask = (task: TaskType, obj: UpdateTaskType, todoId: string): ThunkType => (dispatch: ThunkDispatch<AppStateType, unknown, TodoActionTypes>) => {
     api.changeTask(task, obj, todoId).then(() => {
-        dispatch(updateTask(task.id, obj, todoId))
+        dispatch(updateTaskAC(task.id, obj, todoId))
     });
 };
-
 
 
 export default todolistsReducer

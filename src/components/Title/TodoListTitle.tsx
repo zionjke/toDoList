@@ -1,9 +1,19 @@
 import React from 'react';
 import './Title.scss'
 
-class TodoListTitle extends React.Component {
+type StateType = {
+    isEditMode:boolean
 
-    state = {
+}
+
+type OwnPropsType = {
+    editTitle:(title:string)=>void
+    title:string
+}
+
+class TodoListTitle extends React.Component<OwnPropsType,StateType> {
+
+    state:StateType = {
         isEditMode: false
     };
 
@@ -11,7 +21,7 @@ class TodoListTitle extends React.Component {
         this.setState({isEditMode: true})
     };
 
-    deactivatedEditMode = (e) => {
+    deactivatedEditMode = (e:React.FocusEvent<HTMLInputElement>) => {
         this.props.editTitle(e.currentTarget.value);
         this.setState({isEditMode: false})
     };

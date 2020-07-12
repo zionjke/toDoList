@@ -1,8 +1,22 @@
-import React from 'react';
+import React, {ChangeEvent} from 'react';
 
-class AddNewItemForm extends React.Component {
+type StateType = {
+    error:boolean,
+    title:string
+}
 
-    state = {
+type OwnPropsType = {
+    addItem:(title:string)=>void
+    closePopup?:()=>void
+    toggleFormVisible?:()=>void
+    placeholder:string
+    btnname:string
+    cancelButton?:any
+}
+
+class AddNewItemForm extends React.Component<OwnPropsType, StateType> {
+
+    state:StateType = {
         error: false,
         title: ""
     };
@@ -25,14 +39,14 @@ class AddNewItemForm extends React.Component {
 
     };
 
-    onTitleChanged = (e) => {
+    onTitleChanged = (e:ChangeEvent<HTMLInputElement>) => {
         this.setState({
             error: false,
             title: e.currentTarget.value
         });
     };
 
-    onKeyPress = (e) => {
+    onKeyPress = (e:React.KeyboardEvent<HTMLInputElement>) => {
         if (e.key === "Enter") {
             this.onAddItemClick();
         }

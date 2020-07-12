@@ -1,19 +1,30 @@
 import React from 'react'
 import {connect} from "react-redux";
 import {login} from "../../redux/loginReducer";
-import {statuses} from "../../actions/login";
+import {statuses} from "../../redux/loginReducer";
 import {Redirect} from "react-router-dom";
 import './LoginForm.scss'
+import {AppStateType} from "../../redux/store";
 
-export const LoginForm = ({status,message,login,isAuth}) => {
+type MapStatePropsType = {
+    status:string
+    isAuth:boolean
+    message:string
+}
+
+type MapDispatchPropsType = {
+    login:(email:string,password:string,rememberMe:boolean)=>void
+}
+
+const LoginForm:React.FC<MapStatePropsType & MapDispatchPropsType > = ({status,message,login,isAuth}) => {
 
     if(isAuth) {
         return <Redirect to='/'/>
     }
 
-    let emailRef = React.createRef();
-    let passwordRef = React.createRef();
-    let rememberMeRef = React.createRef();
+    let emailRef = React.createRef<HTMLInputElement>();
+    let passwordRef = React.createRef<HTMLInputElement>();
+    let rememberMeRef = React.createRef<HTMLInputElement>();
 
 const onClickLogin = () => {
     login && login(emailRef.current.value,
@@ -41,13 +52,12 @@ const onClickLogin = () => {
     )
 };
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state:AppStateType):MapStatePropsType => {
     return {
         isAuth: state.auth.isAuth,
         status: state.login.status,
         message: state.login.message,
-        captchaUrl: state.login.captchaUrl
     }
 };
 
-export default connect(mapStateToProps,{login})(LoginForm)
+export default connect<MapStatePropsType,MapDispatchPropsType,{},AppStateType>(mapStateToProps,{login})(LoginForm)

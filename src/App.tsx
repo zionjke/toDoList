@@ -4,26 +4,39 @@ import {createTodoList, deleteTodoList, getTodoLists} from "./redux/todolistsRed
 import List from "./components/List/List";
 import TodoList from "./components/TodoList";
 import AddList from "./components/AddList/AddList";
-import {setActiveList} from "./actions/todolist";
+import {setActiveListAC} from "./actions/todolist";
 import {Route} from "react-router-dom";
 import LoginForm from "./components/LoginForm/LoginForm";
 import AuthBlock from "./components/LoginForm/AuthBlock";
+import {TodoType} from "./types/entities";
+import {AppStateType} from "./redux/store";
+
+type MapStatePropsType = {
+    todolist: Array<TodoType>
+    activelist: any
+}
+
+type MapDispatchPropsType = {
+    setActiveListAC:(list:any)=> void
+    createTodoList:(title:string)=>void
+    deleteTodoList:(todoId:string)=>void
+    getTodoLists:()=>void
+}
+
+class App extends React.Component<MapStatePropsType & MapDispatchPropsType > {
 
 
-class App extends React.Component {
-
-
-    onClickList = (list) => {
-        this.props.setActiveList(list)
+    onClickList = (list:any) => {
+        this.props.setActiveListAC(list)
     };
 
 
-    addTodoList = (title) => {
+    addTodoList = (title:string) => {
         this.props.createTodoList(title)
 
     };
 
-    deleteTodolist = (todoId) => {
+    deleteTodolist = (todoId:string) => {
         this.props.deleteTodoList(todoId)
     };
 
@@ -42,8 +55,7 @@ class App extends React.Component {
                     <List lists={this.props.todolist}
                           onClickList={this.onClickList}
                           activeList={this.props.activelist}
-                          deleteList={this.deleteTodolist}/>
-
+                          deleteTodolist={this.deleteTodolist}/>
                     <AddList addTodoList={this.addTodoList}/>
                 </div>
                 <div className="todo__lists">
@@ -62,7 +74,7 @@ class App extends React.Component {
 }
 
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state:AppStateType):MapStatePropsType => {
     return {
         todolist: state.todolist.todolists,
         activelist: state.todolist.activeList
@@ -71,9 +83,9 @@ const mapStateToProps = (state) => {
 };
 
 
-const ConnectedApp = connect(mapStateToProps, {createTodoList, getTodoLists, deleteTodoList, setActiveList})(App);
+export default  connect<MapStatePropsType,MapDispatchPropsType,{},AppStateType>(mapStateToProps, {createTodoList, getTodoLists, deleteTodoList, setActiveListAC})(App);
 
-export default ConnectedApp;
+
 
 
 

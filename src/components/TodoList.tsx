@@ -6,46 +6,69 @@ import {connect} from "react-redux";
 import {addTask, changeTodoTask, deleteTodoTask, editTodoTitle, getTodoTasks} from "../redux/todolistsReducer";
 
 import AddTaskForm from "./AddTask/AddTaskForm";
+import {TaskType, UpdateTaskType} from "../types/entities";
+import {AppStateType} from "../redux/store";
 
-class TodoList extends React.Component {
+type StateType = {
+    filterValue:string
+}
 
-    state = {
+type OwnPropsType = {
+    id:string,
+    title:string,
+    tasks:Array<TaskType>
+}
+
+type MapDispatchPropsType = {
+    addTask:(title:string, id:string) =>void
+    changeTodoTask:(task:TaskType,obj:UpdateTaskType,id:string)=>void
+    editTodoTitle:(id:string,title:string)=>void
+    deleteTodoTask:(taskId:string,id:string)=>void
+    getTodoTasks:(id:string) => void
+}
+
+
+type PropsType = OwnPropsType & MapDispatchPropsType
+
+class TodoList extends React.Component<PropsType,StateType> {
+
+    state:StateType = {
         filterValue: "All",
     };
 
 
-    addTask = (title) => {
+    addTask = (title:string) => {
         this.props.addTask(title, this.props.id)
     };
 
-    changeFilter = (newFilterValue) => {
+    changeFilter = (newFilterValue:string) => {
         this.setState({
             filterValue: newFilterValue
         });
     };
 
-    changeTask = (task, obj) => {
+    changeTask = (task:TaskType, obj:UpdateTaskType) => {
         this.props.changeTodoTask(task, obj, this.props.id)
     };
 
-    changeStatus = (task, isDone) => {
+    changeStatus = (task:TaskType, isDone:boolean) => {
         this.changeTask(task, {status: isDone ? 2 : 0});
     };
 
-    changePriority = (task,priority) => {
+    changePriority = (task:TaskType,priority:number) => {
         this.changeTask(task,{priority:priority})
     };
 
-    editTaskTitle = (task, newTitle) => {
+    editTaskTitle = (task:TaskType, newTitle:string) => {
         this.changeTask(task, {title: newTitle});
     };
 
 
-    deleteTask = (taskID) => {
+    deleteTask = (taskID:string) => {
         this.props.deleteTodoTask(taskID, this.props.id)
     };
 
-    changeTodoTitle = (title) => {
+    changeTodoTitle = (title:string) => {
         this.props.editTodoTitle(this.props.id, title)
     };
 
@@ -90,11 +113,5 @@ class TodoList extends React.Component {
     }
 }
 
-export default connect(null, {
-    addTask,
-    changeTodoTask,
-    deleteTodoTask,
-    getTodoTasks,
-    editTodoTitle
-})(TodoList)
+export default connect<{},MapDispatchPropsType,OwnPropsType,AppStateType>(null, {addTask, changeTodoTask, deleteTodoTask, getTodoTasks, editTodoTitle})(TodoList)
 

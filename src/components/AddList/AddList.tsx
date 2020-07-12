@@ -4,11 +4,19 @@ import closeSvg from '../../assets/img/close.svg'
 import './AddList.scss'
 import AddNewItemForm from "../AddNewItemForm";
 
-class AddList extends React.Component {
+type StateType = {
+    visiblePopup:boolean
+}
 
-    state = {
+type OwnPropsType = {
+    addTodoList:(title:string) => void
+}
+
+class AddList extends React.Component<OwnPropsType,StateType> {
+
+    state:StateType = {
         visiblePopup: false
-    }
+    };
 
     setVisiblePopup = () => {
         this.setState({

@@ -3,9 +3,17 @@ import AddNewItemForm from "../AddNewItemForm";
 import addSvg from './../../assets/img/add.svg'
 import './AddTaskForm.scss'
 
-class AddTaskForm extends React.Component {
+type StateType = {
+    isVisibleForm:boolean
+}
 
-    state = {
+type OwnPropsType = {
+    addTask:(title:string) => void
+}
+
+class AddTaskForm extends React.Component<OwnPropsType,StateType> {
+
+    state:StateType = {
         isVisibleForm: false
     };
 
@@ -27,7 +35,7 @@ class AddTaskForm extends React.Component {
                                         btnname='Добавить задачу'
                                         addItem={this.props.addTask}
                                         toggleFormVisible={this.toggleFormVisible}
-                                        placeholder='Имя задачи'/>
+                                        placeholder='Имя задачи' />
                     </div>
                 }
             </div>

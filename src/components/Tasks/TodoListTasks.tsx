@@ -1,8 +1,17 @@
 import React from 'react';
 import TodoListTask from "./TodoListTask";
 import './Tasks.scss'
+import {TaskType} from "../../types/entities";
 
-class TodoListTasks extends React.Component {
+type OwnPropsType = {
+    tasks:Array<TaskType>
+    changeStatus: (task:TaskType,isDone:boolean) => void
+    changeTitle:(task:TaskType,title:string) => void
+    deleteTask: (id:string) => void
+    changePriority:(task:TaskType,priority:number)=>void
+}
+
+class TodoListTasks extends React.Component<OwnPropsType> {
     render = () => {
 
         let taskItem = this.props.tasks.map(task => <TodoListTask key={task.id}

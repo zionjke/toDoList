@@ -1,7 +1,14 @@
 import React from 'react';
 import './Footer.scss'
+import {TaskType} from "../../types/entities";
 
-class TodoListFooter extends React.Component {
+type OwnPropsType = {
+    changeFilter:(newFilterValue:string) => void
+    filterValue:string
+    tasks:Array<TaskType>
+}
+
+class TodoListFooter extends React.Component<OwnPropsType> {
 
 
     onAllFilterClick = () => {this.props.changeFilter("All")};
@@ -23,7 +30,6 @@ class TodoListFooter extends React.Component {
                         <button onClick={this.onActiveFilterClick} className={`${classForActive} button`}>Активные</button>
                     </div>
                 </div> }
-
             </>
 
         );
