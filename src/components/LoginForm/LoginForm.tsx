@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {createRef, useRef} from 'react'
 import {connect} from "react-redux";
 import {login} from "../../redux/loginReducer";
 import {statuses} from "../../redux/loginReducer";
@@ -27,10 +27,13 @@ const LoginForm:React.FC<MapStatePropsType & MapDispatchPropsType > = ({status,m
     let rememberMeRef = React.createRef<HTMLInputElement>();
 
 const onClickLogin = () => {
-    login && login(emailRef.current.value,
-        passwordRef.current.value,
-        rememberMeRef.current.checked)
+    // @ts-ignore
+    login && login(emailRef.current?.value,
+        passwordRef.current?.value,
+        rememberMeRef.current?.checked)
 };
+
+
 
     return (
         <div className='login__form'>
@@ -51,6 +54,7 @@ const onClickLogin = () => {
         </div>
     )
 };
+
 
 const mapStateToProps = (state:AppStateType):MapStatePropsType => {
     return {
