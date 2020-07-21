@@ -21,7 +21,7 @@ type OwnPropsType = {
 class TodoListTask extends React.Component<OwnPropsType,StateType> {
 
     state:StateType = {
-        isEditMode: false
+        isEditMode: false,
     };
 
     activatedEditMode = () => {

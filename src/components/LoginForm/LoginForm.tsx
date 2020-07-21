@@ -38,8 +38,8 @@ const onClickLogin = () => {
     return (
         <div className='login__form'>
             <h2>Login</h2>
-            <input className='field' ref={emailRef} placeholder='Введите свой email' type="text"/>
-            <input  className='field' ref={passwordRef} placeholder='Введите пароль'  type="password"/>
+            <input className='field' ref={emailRef} defaultValue='free@samuraijs.com' placeholder='Введите свой email' type="text"/>
+            <input  className='field' ref={passwordRef} defaultValue='free' placeholder='Введите пароль'  type="password"/>
             <span>Remember my:</span><input ref={rememberMeRef} type="checkbox"/>
                 <button className='button' disabled={status === statuses.INPROGRESS} onClick={onClickLogin}>
                     Sign in

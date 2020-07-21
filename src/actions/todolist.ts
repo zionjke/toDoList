@@ -28,6 +28,8 @@ type CreateTodoActionType = {
     newTodolist: TodoType
 }
 
+
+
 export const createTodoAC = (newTodolist:TodoType):CreateTodoActionType => {
     return {
         type: CREATE_TODOLIST,
