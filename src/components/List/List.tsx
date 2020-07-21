@@ -3,7 +3,7 @@ import removeSvg from '../../assets/img/remove.svg'
 import starSvg from '../../assets/img/star.svg'
 import './List.scss'
 import {TodoType} from "../../types/entities";
-import classNames from 'classnames'
+
 
 type OwnPropsType = {
     deleteTodolist:(todoId:string) => void

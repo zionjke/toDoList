@@ -5,7 +5,7 @@ import List from "./components/List/List";
 import TodoList from "./components/TodoList";
 import AddList from "./components/AddList/AddList";
 import {setActiveListAC} from "./actions/todolist";
-import {Route} from "react-router-dom";
+import {Route, Redirect} from "react-router-dom";
 import LoginForm from "./components/LoginForm/LoginForm";
 import AuthBlock from "./components/LoginForm/AuthBlock";
 import {TodoType} from "./types/entities";
@@ -14,6 +14,7 @@ import {AppStateType} from "./redux/store";
 type MapStatePropsType = {
     todolist: Array<TodoType>
     activelist: any
+    isAuth:boolean
 }
 
 type MapDispatchPropsType = {
@@ -56,7 +57,7 @@ class App extends React.Component<MapStatePropsType & MapDispatchPropsType > {
                           onClickList={this.onClickList}
                           activeList={this.props.activelist}
                           deleteTodolist={this.deleteTodolist}/>
-                    <AddList addTodoList={this.addTodoList}/>
+                    <AddList isAuth={this.props.isAuth} addTodoList={this.addTodoList}/>
                 </div>
                 <div className="todo__lists">
                     {this.props.todolist.map(todo => {
@@ -77,8 +78,8 @@ class App extends React.Component<MapStatePropsType & MapDispatchPropsType > {
 const mapStateToProps = (state:AppStateType):MapStatePropsType => {
     return {
         todolist: state.todolist.todolists,
-        activelist: state.todolist.activeList
-
+        activelist: state.todolist.activeList,
+        isAuth:state.auth.isAuth
     }
 };
 
