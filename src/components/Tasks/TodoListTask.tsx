@@ -122,9 +122,15 @@ class TodoListTask extends React.Component<OwnPropsType,StateType> {
                     <span className='date'>{addedDate}</span>
                 </div>
                 <div className='task-priority'>
-                    <div onClick={() => this.props.changePriority(this.props.task,2)} className='task-priority_low'></div>
-                    <div onClick={() => this.props.changePriority(this.props.task,3)} className='task-priority_medium'></div>
-                    <div onClick={() => this.props.changePriority(this.props.task,4)} className='task-priority_high'></div>
+                    <div onClick={() => this.props.changePriority(this.props.task,2)} className='task-priority_low'>
+
+                    </div>
+                    <div onClick={() => this.props.changePriority(this.props.task,3)} className='task-priority_medium'>
+
+                    </div>
+                    <div onClick={() => this.props.changePriority(this.props.task,4)} className='task-priority_high'>
+
+                    </div>
                 </div>
             </div>
         );
