@@ -3,6 +3,7 @@ import removeSvg from '../../assets/img/remove.svg'
 import starSvg from '../../assets/img/star.svg'
 import './List.scss'
 import {TodoType} from "../../types/entities";
+import classNames from 'classnames'
 
 type OwnPropsType = {
     deleteTodolist:(todoId:string) => void
@@ -25,7 +26,7 @@ class List extends React.Component<OwnPropsType> {
                 <ul className="list">
                     {this.props.lists.map((list) => (
                         <li key={list.id}
-                            // className={ (this.props.activeList.id === list.id) && 'active'}
+                            className={`${this.props.activeList.id === list.id && 'active'}`}
                             onClick={() => this.props.onClickList(list)}>
                             <img
                                 className='list__star-icon'
